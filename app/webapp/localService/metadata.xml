@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema Namespace="ZHR_TEAMABS_SRV" xml:lang="de" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityType Name="OrgUnit" sap:content-version="1">
+				<Key>
+					<PropertyRef Name="Orgeh"/>
+				</Key>
+				<Property Name="Orgeh" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Org-Einheit" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+				<Property Name="Parent" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Übergeordnete Org-Einheit" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+				<Property Name="ShortText" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Kürzel" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+				<Property Name="Text" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Bezeichnung" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+				<Property Name="HierLevel" Type="Edm.Int32" Nullable="false" sap:label="Ebene" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+				<Property Name="IsRoot" Type="Edm.Boolean" Nullable="false" sap:label="Wurzel" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+				<Property Name="EmpCount" Type="Edm.Int32" Nullable="false" sap:label="Mitarbeiter" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+			</EntityType>
+			<EntityType Name="Employee" sap:content-version="1">
+				<Key>
+					<PropertyRef Name="Pernr"/>
+				</Key>
+				<Property Name="Pernr" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Personalnummer" sap:creatable="false" sap:updatable="false"/>
+				<Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+				<Property Name="Orgeh" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Org-Einheit" sap:creatable="false" sap:updatable="false"/>
+				<Property Name="OrgehText" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Org-Einheit (Text)" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+				<Property Name="Plans" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Planstelle" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+				<Property Name="PlansText" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Planstelle (Text)" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+				<Property Name="Werks" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Personalbereich" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+				<Property Name="Btrtl" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Personalteilbereich" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+			</EntityType>
+			<EntityType Name="Absence" sap:content-version="1">
+				<Key>
+					<PropertyRef Name="AbsenceId"/>
+				</Key>
+				<Property Name="AbsenceId" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+				<Property Name="Pernr" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Personalnummer" sap:creatable="false" sap:updatable="false"/>
+				<Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+				<Property Name="AbsenceType" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Abwesenheitsart" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+				<Property Name="AbsenceTypeText" Type="Edm.String" Nullable="false" MaxLength="25" sap:label="Abwesenheitsart (Text)" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+				<Property Name="BeginDate" Type="Edm.DateTime" Nullable="false" Precision="7" sap:display-format="Date" sap:label="Beginn" sap:creatable="false" sap:updatable="false"/>
+				<Property Name="EndDate" Type="Edm.DateTime" Nullable="false" Precision="7" sap:display-format="Date" sap:label="Ende" sap:creatable="false" sap:updatable="false"/>
+				<Property Name="BeginTime" Type="Edm.Time" Nullable="false" sap:label="Beginnzeit" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+				<Property Name="EndTime" Type="Edm.Time" Nullable="false" sap:label="Endezeit" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+				<Property Name="Days" Type="Edm.Decimal" Nullable="false" Precision="6" Scale="2" sap:label="Tage" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+				<Property Name="Hours" Type="Edm.Decimal" Nullable="false" Precision="7" Scale="2" sap:label="Stunden" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+				<Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Status" sap:creatable="false" sap:updatable="false"/>
+				<Property Name="Source" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Herkunft" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+			</EntityType>
+			<EntityContainer Name="ZHR_TEAMABS_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+				<EntitySet Name="OrgUnits" EntityType="ZHR_TEAMABS_SRV.OrgUnit" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+				<EntitySet Name="Employees" EntityType="ZHR_TEAMABS_SRV.Employee" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+				<EntitySet Name="Absences" EntityType="ZHR_TEAMABS_SRV.Absence" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+			</EntityContainer>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

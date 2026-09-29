@@ -1,0 +1,132 @@
+[
+ {
+  "Pernr": "00001001",
+  "Name": "Katrin Vogel",
+  "Orgeh": "50000100",
+  "OrgehText": "Abrechnung & Zeitwirtschaft",
+  "Plans": "50001001",
+  "PlansText": "Stellv. Referatsleitung",
+  "Werks": "1000",
+  "Btrtl": "0001"
+ },
+ {
+  "Pernr": "00001002",
+  "Name": "Jonas Richter",
+  "Orgeh": "50000100",
+  "OrgehText": "Abrechnung & Zeitwirtschaft",
+  "Plans": "50001002",
+  "PlansText": "Sachbearbeitung Grundsatz",
+  "Werks": "1000",
+  "Btrtl": "0001"
+ },
+ {
+  "Pernr": "00001010",
+  "Name": "Miriam Schulz",
+  "Orgeh": "50000110",
+  "OrgehText": "Entgeltabrechnung Tarif",
+  "Plans": "50001010",
+  "PlansText": "Teamleitung Tarif",
+  "Werks": "1000",
+  "Btrtl": "0001"
+ },
+ {
+  "Pernr": "00001011",
+  "Name": "Deniz Aydin",
+  "Orgeh": "50000110",
+  "OrgehText": "Entgeltabrechnung Tarif",
+  "Plans": "50001011",
+  "PlansText": "Sachbearbeitung Entgelt",
+  "Werks": "1000",
+  "Btrtl": "0001"
+ },
+ {
+  "Pernr": "00001012",
+  "Name": "Peter Hoffmann",
+  "Orgeh": "50000110",
+  "OrgehText": "Entgeltabrechnung Tarif",
+  "Plans": "50001012",
+  "PlansText": "Sachbearbeitung Entgelt",
+  "Werks": "1000",
+  "Btrtl": "0001"
+ },
+ {
+  "Pernr": "00001013",
+  "Name": "Laura Klein",
+  "Orgeh": "50000110",
+  "OrgehText": "Entgeltabrechnung Tarif",
+  "Plans": "50001013",
+  "PlansText": "Sachbearbeitung Entgelt",
+  "Werks": "1000",
+  "Btrtl": "0001"
+ },
+ {
+  "Pernr": "00001020",
+  "Name": "Stefan Wagner",
+  "Orgeh": "50000120",
+  "OrgehText": "Entgeltabrechnung Besoldung",
+  "Plans": "50001020",
+  "PlansText": "Teamleitung Besoldung",
+  "Werks": "1000",
+  "Btrtl": "0001"
+ },
+ {
+  "Pernr": "00001021",
+  "Name": "Elena Petrova",
+  "Orgeh": "50000120",
+  "OrgehText": "Entgeltabrechnung Besoldung",
+  "Plans": "50001021",
+  "PlansText": "Sachbearbeitung Besoldung",
+  "Werks": "1000",
+  "Btrtl": "0001"
+ },
+ {
+  "Pernr": "00001022",
+  "Name": "Tobias Braun",
+  "Orgeh": "50000120",
+  "OrgehText": "Entgeltabrechnung Besoldung",
+  "Plans": "50001022",
+  "PlansText": "Sachbearbeitung Besoldung",
+  "Werks": "1000",
+  "Btrtl": "0001"
+ },
+ {
+  "Pernr": "00001030",
+  "Name": "Sabine König",
+  "Orgeh": "50000130",
+  "OrgehText": "Zeitwirtschaft",
+  "Plans": "50001030",
+  "PlansText": "Teamleitung Zeitwirtschaft",
+  "Werks": "1000",
+  "Btrtl": "0001"
+ },
+ {
+  "Pernr": "00001031",
+  "Name": "Marco Lange",
+  "Orgeh": "50000130",
+  "OrgehText": "Zeitwirtschaft",
+  "Plans": "50001031",
+  "PlansText": "Sachbearbeitung Zeitwirtschaft",
+  "Werks": "1000",
+  "Btrtl": "0001"
+ },
+ {
+  "Pernr": "00001040",
+  "Name": "Julia Neumann",
+  "Orgeh": "50000131",
+  "OrgehText": "Zeiterfassung Außenstellen",
+  "Plans": "50001040",
+  "PlansText": "Zeiterfassung",
+  "Werks": "1000",
+  "Btrtl": "0001"
+ },
+ {
+  "Pernr": "00001041",
+  "Name": "Ahmet Yilmaz",
+  "Orgeh": "50000131",
+  "OrgehText": "Zeiterfassung Außenstellen",
+  "Plans": "50001041",
+  "PlansText": "Zeiterfassung",
+  "Werks": "1000",
+  "Btrtl": "0001"
+ }
+]

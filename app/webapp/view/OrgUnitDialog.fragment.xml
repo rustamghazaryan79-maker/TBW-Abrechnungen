@@ -1,0 +1,36 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		id="orgUnitDialog"
+		title="{i18n>orgDialogTitle}"
+		contentWidth="32rem"
+		contentHeight="60%"
+		resizable="true"
+		draggable="true"
+		horizontalScrolling="false">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="orgUnitSearch" placeholder="{i18n>orgDialogSearch}" liveChange=".onOrgSearch" width="100%"/>
+			</Toolbar>
+		</subHeader>
+		<content>
+			<Tree
+				id="orgUnitTree"
+				mode="MultiSelect"
+				includeItemInSelection="true"
+				items="{path: 'view>/orgTree', parameters: {arrayNames: ['children']}}">
+				<StandardTreeItem
+					title="{parts: ['view>Text', 'view>EmpCount'], formatter: '.formatOrgNode'}"
+					icon="sap-icon://org-chart"
+					selected="{view>selected}"/>
+			</Tree>
+		</content>
+		<beginButton>
+			<Button type="Emphasized" text="{i18n>btnOk}" press=".onOrgDialogConfirm"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>btnCancel}" press=".onOrgDialogCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

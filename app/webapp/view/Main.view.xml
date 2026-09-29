@@ -1,0 +1,272 @@
+<mvc:View
+	controllerName="zhr.teamabs.controller.Main"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:unified="sap.ui.unified"
+	displayBlock="true"
+	height="100%">
+
+	<f:DynamicPage id="page" headerExpanded="true" toggleHeaderOnTitleClick="true">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="{i18n>appTitle}" wrapping="true"/>
+				</f:heading>
+				<f:snappedContent>
+					<Text text="{view>/filterSummary}"/>
+				</f:snappedContent>
+				<f:expandedContent>
+					<Text text="{i18n>appSubTitle}"/>
+				</f:expandedContent>
+			</f:DynamicPageTitle>
+		</f:title>
+
+		<!-- Selektion -->
+		<f:header>
+			<f:DynamicPageHeader pinnable="true">
+				<f:content>
+					<MessageStrip
+						class="zhrTeamAbsRootInfo"
+						visible="{view>/noOrgUnits}"
+						type="Warning"
+						showIcon="true"
+						text="{i18n>msgNoOrgUnits}"/>
+					<fb:FilterBar
+						id="filterBar"
+						useToolbar="false"
+						showGoOnFB="true"
+						showFilterConfiguration="false"
+						search=".onSearch">
+						<fb:filterGroupItems>
+							<fb:FilterGroupItem name="OrgUnits" groupName="__$INTERNAL$" label="{i18n>filterOrgUnits}" visibleInFilterBar="true">
+								<fb:control>
+									<MultiInput
+										id="orgUnitInput"
+										showValueHelp="true"
+										valueHelpOnly="true"
+										placeholder="{i18n>filterOrgUnitsPlaceholder}"
+										valueHelpRequest=".onOrgValueHelp"
+										tokenUpdate=".onOrgTokenUpdate"
+										tokens="{path: 'view>/selectedOrgUnits', templateShareable: false}">
+										<tokens>
+											<Token key="{view>Orgeh}" text="{view>Text}"/>
+										</tokens>
+									</MultiInput>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem name="SubUnits" groupName="__$INTERNAL$" label="{i18n>filterSubUnits}" visibleInFilterBar="true">
+								<fb:control>
+									<CheckBox id="subUnitsCheckBox" text="{i18n>filterSubUnitsText}" selected="{view>/includeSubUnits}"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem name="Period" groupName="__$INTERNAL$" label="{i18n>filterPeriod}" visibleInFilterBar="true" mandatory="true">
+								<fb:control>
+									<DateRangeSelection
+										id="periodInput"
+										dateValue="{view>/dateFrom}"
+										secondDateValue="{view>/dateTo}"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem name="Status" groupName="__$INTERNAL$" label="{i18n>filterStatus}" visibleInFilterBar="true">
+								<fb:control>
+									<MultiComboBox id="statusInput" selectedKeys="{view>/statuses}" selectionFinish=".onClientFilterChange">
+										<core:Item key="POSTED" text="{i18n>statusPOSTED}"/>
+										<core:Item key="APPROVED" text="{i18n>statusAPPROVED}"/>
+										<core:Item key="SENT" text="{i18n>statusSENT}"/>
+									</MultiComboBox>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem name="Employee" groupName="__$INTERNAL$" label="{i18n>filterEmployee}" visibleInFilterBar="true">
+								<fb:control>
+									<SearchField
+										id="employeeSearch"
+										value="{view>/employeeQuery}"
+										placeholder="{i18n>filterEmployeePlaceholder}"
+										liveChange=".onClientFilterChange"
+										search=".onClientFilterChange"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+						</fb:filterGroupItems>
+					</fb:FilterBar>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+
+		<f:content>
+			<IconTabBar
+				id="tabs"
+				selectedKey="{view>/tab}"
+				expandable="false"
+				applyContentPadding="false"
+				class="sapUiNoContentPadding">
+				<items>
+
+					<!-- 1) Mitarbeiter auswählen -->
+					<IconTabFilter key="employees" icon="sap-icon://group" text="{i18n>tabEmployees}" count="{view>/employeeCount}">
+						<Table
+							id="employeeTable"
+							mode="MultiSelect"
+							growing="true"
+							growingThreshold="100"
+							growingScrollToLoad="true"
+							sticky="ColumnHeaders,HeaderToolbar,InfoToolbar"
+							noDataText="{i18n>noEmployees}"
+							selectionChange=".onEmployeeSelectionChange"
+							items="{path: 'view>/employees', sorter: {path: 'Name'}}">
+							<headerToolbar>
+								<OverflowToolbar>
+									<Title text="{view>/employeesTitle}" level="H2"/>
+									<ToolbarSpacer/>
+									<Button text="{i18n>btnSelectNone}" press=".onSelectNone" enabled="{= ${view>/selectedPernrs}.length > 0 }"/>
+									<Button type="Emphasized" icon="sap-icon://calendar" text="{i18n>btnShowCalendar}" press=".onShowCalendar"/>
+								</OverflowToolbar>
+							</headerToolbar>
+							<infoToolbar>
+								<OverflowToolbar>
+									<Label text="{view>/selectionInfo}"/>
+								</OverflowToolbar>
+							</infoToolbar>
+							<columns>
+								<Column>
+									<Text text="{i18n>colName}"/>
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="7rem">
+									<Text text="{i18n>colPernr}"/>
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true">
+									<Text text="{i18n>colOrgUnit}"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="{i18n>colPosition}"/>
+								</Column>
+								<Column hAlign="End" width="10rem">
+									<Text text="{i18n>colAbsenceDays}"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem selected="{view>selected}">
+									<cells>
+										<ObjectIdentifier title="{view>Name}"/>
+										<Text text="{view>Pernr}"/>
+										<Text text="{view>OrgehText}"/>
+										<Text text="{view>PlansText}"/>
+										<ObjectNumber number="{path: 'view>absenceDays', formatter: '.formatter.number'}" unit="{i18n>colDays}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
+
+					<!-- 2) Teamkalender wie in PTARQ -->
+					<IconTabFilter key="calendar" icon="sap-icon://calendar" text="{i18n>tabCalendar}" count="{view>/rowCount}">
+						<VBox>
+							<PlanningCalendar
+								id="calendar"
+								builtInViews="Day,Week,One Month"
+								startDate="{view>/calendarStart}"
+								appointmentsVisualization="Filled"
+								showWeekNumbers="true"
+								stickyHeader="true"
+								showEmptyIntervalHeaders="false"
+								noDataText="{i18n>calendarNoData}"
+								legend="legend"
+								appointmentSelect=".onAppointmentSelect"
+								rows="{path: 'view>/rows', templateShareable: false}">
+								<rows>
+									<PlanningCalendarRow
+										icon="sap-icon://employee"
+										title="{view>title}"
+										text="{view>text}"
+										appointments="{path: 'view>appointments', templateShareable: false}">
+										<appointments>
+											<unified:CalendarAppointment
+												startDate="{view>start}"
+												endDate="{view>end}"
+												title="{view>title}"
+												text="{view>text}"
+												icon="{view>icon}"
+												color="{view>color}"
+												tooltip="{view>tooltip}"/>
+										</appointments>
+									</PlanningCalendarRow>
+								</rows>
+							</PlanningCalendar>
+							<Panel headerText="{i18n>legendTitle}" expandable="true" expanded="true" class="sapUiSmallMarginTop">
+								<PlanningCalendarLegend id="legend" class="zhrTeamAbsLegend" standardItems="Today">
+									<appointmentItems>
+										<unified:CalendarLegendItem text="{i18n>legendPOSTED}" color="#256f3a"/>
+										<unified:CalendarLegendItem text="{i18n>legendAPPROVED}" color="#0070f2"/>
+										<unified:CalendarLegendItem text="{i18n>legendSENT}" color="#e76500"/>
+									</appointmentItems>
+								</PlanningCalendarLegend>
+							</Panel>
+						</VBox>
+					</IconTabFilter>
+
+					<!-- 3) Liste + Excel-Export -->
+					<IconTabFilter key="list" icon="sap-icon://list" text="{i18n>tabList}" count="{view>/absenceCount}">
+						<Table
+							id="absenceTable"
+							growing="true"
+							growingThreshold="100"
+							growingScrollToLoad="true"
+							sticky="ColumnHeaders,HeaderToolbar"
+							noDataText="{i18n>noAbsences}"
+							items="{path: 'view>/visibleAbsences', sorter: [{path: 'Name'}, {path: 'begin'}]}">
+							<headerToolbar>
+								<OverflowToolbar>
+									<Title text="{view>/absencesTitle}" level="H2"/>
+									<ToolbarSpacer/>
+									<Button icon="sap-icon://excel-attachment" text="{i18n>btnExport}" press=".onExport" enabled="{= ${view>/visibleAbsences}.length > 0 }"/>
+								</OverflowToolbar>
+							</headerToolbar>
+							<columns>
+								<Column>
+									<Text text="{i18n>colName}"/>
+								</Column>
+								<Column>
+									<Text text="{i18n>colAbsenceType}"/>
+								</Column>
+								<Column>
+									<Text text="{i18n>detailPeriod}"/>
+								</Column>
+								<Column hAlign="End" minScreenWidth="Tablet" demandPopin="true" width="6rem">
+									<Text text="{i18n>colDays}"/>
+								</Column>
+								<Column hAlign="End" minScreenWidth="Desktop" demandPopin="true" width="6rem">
+									<Text text="{i18n>colHours}"/>
+								</Column>
+								<Column width="10rem">
+									<Text text="{i18n>colStatus}"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="{i18n>colSource}"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<ObjectIdentifier title="{view>Name}" text="{view>Pernr}"/>
+										<ObjectIdentifier title="{view>AbsenceTypeText}" text="{view>AbsenceType}"/>
+										<Text text="{parts: ['view>begin', 'view>endDay'], formatter: '.formatter.period'}"/>
+										<Text text="{path: 'view>Days', formatter: '.formatter.number'}"/>
+										<Text text="{path: 'view>Hours', formatter: '.formatter.number'}"/>
+										<ObjectStatus
+											text="{path: 'view>Status', formatter: '.formatter.statusText'}"
+											state="{path: 'view>Status', formatter: '.formatter.statusState'}"
+											icon="{path: 'view>Status', formatter: '.formatter.statusIcon'}"/>
+										<Text text="{path: 'view>Source', formatter: '.formatter.sourceText'}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
+
+				</items>
+			</IconTabBar>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

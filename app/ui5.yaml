@@ -1,0 +1,28 @@
+# Lokaler Start gegen das echte Backend (Gateway-System)
+# URL und Mandant unten anpassen.
+specVersion: "3.0"
+metadata:
+  name: zhr.teamabs
+type: application
+framework:
+  name: SAPUI5
+  version: "1.120.0"
+  libraries:
+    - name: sap.m
+    - name: sap.f
+    - name: sap.ui.comp
+    - name: sap.ui.core
+    - name: sap.ui.layout
+    - name: sap.ui.unified
+    - name: sap.ui.export
+    - name: themelib_sap_horizon
+server:
+  customMiddleware:
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertError: false
+        backend:
+          - path: /sap
+            url: https://mein-gateway.example.local:44300
+            client: "100"

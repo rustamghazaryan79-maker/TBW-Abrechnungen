@@ -1,0 +1,47 @@
+[
+ {
+  "Orgeh": "50000100",
+  "Parent": "",
+  "ShortText": "ABR-ZW",
+  "Text": "Abrechnung & Zeitwirtschaft",
+  "HierLevel": 1,
+  "IsRoot": true,
+  "EmpCount": 2
+ },
+ {
+  "Orgeh": "50000110",
+  "Parent": "50000100",
+  "ShortText": "ABR-T",
+  "Text": "Entgeltabrechnung Tarif",
+  "HierLevel": 2,
+  "IsRoot": false,
+  "EmpCount": 4
+ },
+ {
+  "Orgeh": "50000120",
+  "Parent": "50000100",
+  "ShortText": "ABR-B",
+  "Text": "Entgeltabrechnung Besoldung",
+  "HierLevel": 2,
+  "IsRoot": false,
+  "EmpCount": 3
+ },
+ {
+  "Orgeh": "50000130",
+  "Parent": "50000100",
+  "ShortText": "ZW",
+  "Text": "Zeitwirtschaft",
+  "HierLevel": 2,
+  "IsRoot": false,
+  "EmpCount": 2
+ },
+ {
+  "Orgeh": "50000131",
+  "Parent": "50000130",
+  "ShortText": "ZW-AS",
+  "Text": "Zeiterfassung Außenstellen",
+  "HierLevel": 3,
+  "IsRoot": false,
+  "EmpCount": 2
+ }
+]

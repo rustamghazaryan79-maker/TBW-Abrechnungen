@@ -1,0 +1,8 @@
+/* Legende neben dem Kalender nicht zu breit werden lassen */
+.zhrTeamAbsLegend {
+	max-width: 16rem;
+}
+
+.zhrTeamAbsRootInfo {
+	margin-bottom: 0.5rem;
+}
