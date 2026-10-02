@@ -1,5 +1,7 @@
-# Lokaler Start gegen das echte Backend (Gateway-System)
-# URL und Mandant unten anpassen.
+# Start gegen das echte Backend (Gateway-System)
+# Lokal (VS Code):  url + client werden benutzt.
+# SAP Business Application Studio: destination wird benutzt (BTP-Destination,
+# bei On-Premise über den Cloud Connector). Name unten anpassen.
 specVersion: "3.0"
 metadata:
   name: zhr.teamabs
@@ -25,4 +27,5 @@ server:
         backend:
           - path: /sap
             url: https://mein-gateway.example.local:44300
+            destination: HR_GATEWAY
             client: "100"

@@ -15,6 +15,7 @@ builder:
         ignoreCertError: false
         target:
           url: https://mein-gateway.example.local:44300
+          destination: HR_GATEWAY
           client: "100"
         app:
           name: ZHR_TEAMABS

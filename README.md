@@ -107,6 +107,20 @@ npm start               # lokal mit Mockdaten, ohne SAP-System
 
 Gegen ein echtes Backend: in `app/ui5.yaml` URL und Mandant eintragen, dann `npm run start-backend`.
 
+### In SAP Business Application Studio (BAS) testen
+
+1. Dev Space vom Typ **SAP Fiori** anlegen und starten.
+2. Repo klonen (*Clone from Git*) und den Ordner `app` öffnen (*File › Open Folder › …/app*).
+3. Terminal: `npm install`, dann `npm start`. BAS meldet „A service is listening to port 8080“ →
+   *Open in a New Tab*. Falls die Seite leer ist, `/test/mockServer.html` an die URL hängen.
+4. Gegen das echte System: im BTP-Subaccount eine Destination anlegen (Name wie in `ui5.yaml`,
+   Standard `HR_GATEWAY`), Typ HTTP, Proxy-Typ `OnPremise` über den Cloud Connector,
+   Authentifizierung z. B. `PrincipalPropagation` oder `BasicAuthentication`, zusätzliche
+   Eigenschaften `WebIDEEnabled=true`, `WebIDEUsage=odata_abap,dev_abap`, `HTML5.DynamicDestination=true`.
+   Im Cloud Connector den Pfad `/sap/opu/odata` (und für das Deployment `/sap/bc/adt`) freigeben.
+   Dann `npm run start-backend`.
+5. Deployment aus BAS: `npm run deploy-test` (Probelauf), danach `npm run deploy`.
+
 ### Deployment und Launchpad
 
 1. In `app/ui5-deploy.yaml` System, Paket und Transportauftrag eintragen.
